@@ -1,6 +1,11 @@
 # Sayyed Kashaf — Personal Data Science Portfolio
 
-> Personal portfolio website for **Sayyed Kashaf**, B.Sc. Data Science student at Mumbai University (SDBI). Showcasing hands-on projects across data analysis, machine learning fundamentals, generative AI, backend development, and cybersecurity.
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Website-0d9488?style=for-the-badge&logo=firefox&logoColor=white)](https://sayyedkashaf.github.io/kashaf-portfolio/)
+[![GitHub Pages](https://img.shields.io/badge/Deployed%20with-GitHub%20Pages-14b8a6?style=for-the-badge&logo=github)](https://sayyedkashaf.github.io/kashaf-portfolio/)
+
+> **Live Website:** [https://sayyedkashaf.github.io/kashaf-portfolio/](https://sayyedkashaf.github.io/kashaf-portfolio/)
+
+Personal portfolio website for **Sayyed Kashaf**, B.Sc. Data Science student at Mumbai University (SDBI). Showcasing hands-on projects across data analysis, machine learning fundamentals, generative AI, backend development, and cybersecurity.
 
 ---
 
