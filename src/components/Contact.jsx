@@ -50,9 +50,6 @@ export default function Contact() {
       <div className="container">
         
         <div className="section-header">
-          <div className="section-tag">
-            <span>06 // Communication</span>
-          </div>
           <h2 className="section-title">
             Let's <span className="gradient-text">Connect</span>
           </h2>
