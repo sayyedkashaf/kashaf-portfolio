@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
+import SylvaHero from './components/SylvaHero';
 import About from './components/About';
 import CurrentFocus from './components/CurrentFocus';
 import Timeline from './components/Timeline';
@@ -37,16 +36,22 @@ export default function App() {
       <div className="bg-ambient-blob blob-2" aria-hidden="true" />
       <div className="bg-ambient-blob blob-3" aria-hidden="true" />
 
-      {/* Main Navigation */}
-      <Navbar
-        theme={theme}
-        toggleTheme={toggleTheme}
-        onOpenResume={() => setResumeOpen(true)}
-      />
-
-      {/* Main Content Sections */}
+      {/* Main Content with Sylva Living-Green 3D Hero */}
       <main>
-        <Hero />
+        <SylvaHero
+          variant="living-green"
+          headingFont="lexend"
+          bodyFont="lexend"
+          headingWeight="300"
+          bodyWeight="300"
+          primaryColor="#ffffff"
+          headingSize={61}
+          bodySize={16}
+          headingLetterSpacing={-0.006}
+          onOpenResume={() => setResumeOpen(true)}
+          theme={theme}
+          toggleTheme={toggleTheme}
+        />
         <About />
         <CurrentFocus />
         <Timeline />
