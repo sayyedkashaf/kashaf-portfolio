@@ -1,20 +1,13 @@
 import React from 'react';
 import { timelineData } from '../data/experience';
-import { 
-  GraduationCap, 
-  Briefcase, 
-  Calendar, 
-  MapPin, 
-  CheckCircle, 
-  BookOpen 
-} from 'lucide-react';
+import { GraduationCap, Briefcase, Calendar, MapPin, CheckCircle, BookOpen } from 'lucide-react';
 
 export default function Timeline() {
   return (
     <section id="education" className="section education-section">
       <div className="container">
-        
-        <div className="section-header">
+
+        <div className="section-header" data-reveal>
           <div className="section-tag">
             <span>03 // Academic Timeline</span>
           </div>
@@ -22,7 +15,7 @@ export default function Timeline() {
             Education &amp; <span className="gradient-text">Practical Experience</span>
           </h2>
           <p className="section-subtitle">
-            A chronological timeline of degree pursuits, foundational coursework, and hands-on 
+            A chronological timeline of degree pursuits, foundational coursework, and hands-on
             development milestones.
           </p>
         </div>
@@ -33,9 +26,8 @@ export default function Timeline() {
           {timelineData.map((item, index) => {
             const isEducation = item.type === 'education';
             return (
-              <div key={index} className="timeline-item">
-                
-                {/* Node icon */}
+              <div key={index} className="timeline-item" data-reveal style={{ '--rd': `${index * 140}ms` }}>
+
                 <div className="timeline-node">
                   {isEducation ? (
                     <GraduationCap size={20} className="node-icon" />
@@ -44,7 +36,6 @@ export default function Timeline() {
                   )}
                 </div>
 
-                {/* Content Card */}
                 <div className="timeline-card glass-card">
                   <div className="timeline-card-header">
                     <div className="timeline-period-badge">

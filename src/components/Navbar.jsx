@@ -12,6 +12,7 @@ import {
 
 export default function Navbar({ theme, toggleTheme, onOpenResume }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
@@ -26,11 +27,17 @@ export default function Navbar({ theme, toggleTheme, onOpenResume }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const y = window.scrollY;
+      setIsScrolled(y > 20);
+
+      // Slide in only after the hero showcase has scrolled out of view
+      const hero = document.getElementById('hero');
+      const heroBottom = hero ? hero.offsetTop + hero.offsetHeight : 0;
+      setIsVisible(y > heroBottom - Math.min(140, window.innerHeight * 0.2));
 
       // Scrollspy calculation
       const sections = ['about', 'focus', 'education', 'projects', 'skills', 'contact'];
-      const scrollPosition = window.scrollY + 160;
+      const scrollPosition = y + 160;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
@@ -42,6 +49,7 @@ export default function Navbar({ theme, toggleTheme, onOpenResume }) {
       setActiveSection('hero');
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -51,7 +59,7 @@ export default function Navbar({ theme, toggleTheme, onOpenResume }) {
   };
 
   return (
-    <header className={`navbar-wrapper ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`navbar-wrapper ${isVisible ? 'visible' : ''} ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
         {/* Brand / Logo */}
         <a href="#hero" className="nav-brand" onClick={() => setMobileMenuOpen(false)}>

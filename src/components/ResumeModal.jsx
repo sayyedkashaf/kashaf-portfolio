@@ -63,7 +63,7 @@ export default function ResumeModal({ isOpen, onClose }) {
               <div className="doc-contact-line">
                 <span><MapPin size={13} /> Mumbai, India</span>
                 <span>&bull;</span>
-                <a href="mailto:sayyedkashaf.ds@gmail.com"><Mail size={13} /> sayyedkashaf.ds@gmail.com</a>
+                <a href="mailto:kashafsayyed2008@gmail.com"><Mail size={13} /> kashafsayyed2008@gmail.com</a>
                 <span>&bull;</span>
                 <a href="https://github.com/sayyedkashaf" target="_blank" rel="noreferrer"><Github size={13} /> github.com/sayyedkashaf</a>
                 <span>&bull;</span>

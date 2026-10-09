@@ -13,8 +13,8 @@ export default function Projects() {
   return (
     <section id="projects" className="section projects-section">
       <div className="container">
-        
-        <div className="section-header">
+
+        <div className="section-header" data-reveal>
           <div className="section-tag">
             <span>04 // Verifiable Code</span>
           </div>
@@ -22,13 +22,12 @@ export default function Projects() {
             Featured Practical <span className="gradient-text">Projects</span>
           </h2>
           <p className="section-subtitle">
-            Authentic repositories built to explore machine learning embeddings, 
+            Authentic repositories built to explore machine learning embeddings,
             defensive web engineering, threat intelligence, and high-performance APIs.
           </p>
         </div>
 
-        {/* Category Filters */}
-        <div className="project-filter-bar">
+        <div className="project-filter-bar" data-reveal style={{ '--rd': '120ms' }}>
           {projectCategories.map((category) => (
             <button
               key={category}
@@ -45,15 +44,13 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* Projects Grid */}
         <div className="projects-grid">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {filteredProjects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
 
-        {/* Bottom Banner: GitHub Repository CTA */}
-        <div className="github-explore-banner glass-card">
+        <div className="github-explore-banner glass-card" data-reveal>
           <div className="banner-left">
             <div className="banner-icon-box">
               <FolderGit2 size={24} />

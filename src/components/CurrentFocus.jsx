@@ -1,15 +1,6 @@
 import React from 'react';
 import { currentFocusList } from '../data/skills';
-import { 
-  TrendingUp, 
-  Terminal, 
-  Database, 
-  BarChart, 
-  Cpu, 
-  Server, 
-  ShieldAlert, 
-  Sparkles 
-} from 'lucide-react';
+import { TrendingUp, Terminal, Database, BarChart, Cpu, Server, ShieldAlert, Sparkles } from 'lucide-react';
 
 export default function CurrentFocus() {
   const getIcon = (tag) => {
@@ -36,8 +27,8 @@ export default function CurrentFocus() {
   return (
     <section id="focus" className="section focus-section">
       <div className="container">
-        
-        <div className="section-header">
+
+        <div className="section-header" data-reveal>
           <div className="section-tag">
             <span>02 // Continuous Growth</span>
           </div>
@@ -45,14 +36,14 @@ export default function CurrentFocus() {
             Current <span className="gradient-text">Learning Focus</span>
           </h2>
           <p className="section-subtitle">
-            Curated active areas of study and experimentation. Transparently tracking foundational 
+            Curated active areas of study and experimentation. Transparently tracking foundational
             milestones rather than asserting unearned senior claims.
           </p>
         </div>
 
         <div className="focus-grid">
           {currentFocusList.map((item, index) => (
-            <div key={index} className="focus-card glass-card">
+            <div key={index} className="focus-card glass-card" data-reveal style={{ '--rd': `${(index % 3) * 110}ms` }}>
               <div className="focus-top">
                 <div className="focus-icon-wrapper">
                   {getIcon(item.tag)}

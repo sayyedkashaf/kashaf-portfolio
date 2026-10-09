@@ -592,6 +592,30 @@ void main(){
     }
 
     /* =====================================================================
+       2b. Dock Scrollspy — highlight the section currently in view
+       ===================================================================== */
+    const dockRootEl = rootEl.querySelector('.sylva-dock');
+    if (dockRootEl) {
+      const updateDockSpy = () => {
+        const sectionIds = ['about', 'focus', 'education', 'projects', 'skills', 'contact'];
+        const scrollPos = window.scrollY + Math.round(window.innerHeight * 0.35);
+        let currentId = '';
+        for (const id of sectionIds) {
+          const el = document.getElementById(id);
+          if (el && el.offsetTop <= scrollPos) currentId = id;
+        }
+        const items = dockRootEl.querySelectorAll('a.sylva-dock-item');
+        items.forEach((item) => {
+          const href = item.getAttribute('href') || '';
+          item.classList.toggle('is-active', currentId !== '' && href === `#${currentId}`);
+        });
+      };
+      window.addEventListener('scroll', updateDockSpy, { passive: true });
+      updateDockSpy();
+      cleanupFns.push(() => window.removeEventListener('scroll', updateDockSpy));
+    }
+
+    /* =====================================================================
        3. Parallax Pointer Movement
        ===================================================================== */
     let smooth = { x: 0, y: 0 }, targetP = { x: 0, y: 0 };
@@ -778,10 +802,10 @@ void main(){
     };
   }, []);
 
-  return (
-    <div ref={containerRef} className="sylva-hero-wrapper">
-      <main className="sylva-hero" id="hero">
-        <canvas id="sylva-scene"></canvas>
+    return (
+      <div ref={containerRef} className="sylva-hero-wrapper">
+        <div className="sylva-hero" id="hero">
+          <canvas id="sylva-scene"></canvas>
 
         {/* ── Top Floating Glass Dock Navigation ────────────────────────── */}
         <div className="sylva-dock-wrap">
@@ -799,7 +823,7 @@ void main(){
             </a>
 
             {/* Section links */}
-            <a className="sylva-dock-item is-active" data-dock data-spec href="#about">
+            <a className="sylva-dock-item" data-dock data-spec href="#about">
               <span className="dock-glyph" aria-hidden="true">
                 <svg viewBox="0 0 16 16">
                   <circle cx="8" cy="8" r="6" />
@@ -1059,9 +1083,9 @@ void main(){
             Discover<span className="track"></span>
           </a>
         </div>
-      </main>
-    </div>
-  );
-}
+      </div>
+      </div>
+    );
+  }
 
 export default SylvaHero;

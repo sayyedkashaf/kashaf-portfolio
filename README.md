@@ -110,4 +110,4 @@ personal website/
 - **Developer:** Sayyed Kashaf
 - **GitHub:** [https://github.com/sayyedkashaf](https://github.com/sayyedkashaf)
 - **LinkedIn:** [https://www.linkedin.com/in/kashaf-sayyed-712635379](https://www.linkedin.com/in/kashaf-sayyed-712635379)
-- **Email:** [sayyedkashaf.ds@gmail.com](mailto:sayyedkashaf.ds@gmail.com)
+- **Email:** [kashafsayyed2008@gmail.com](mailto:kashafsayyed2008@gmail.com)

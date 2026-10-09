@@ -20,7 +20,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer-container">
         
-        <div className="footer-top-row">
+        <div className="footer-top-row" data-reveal>
           {/* Brand Info */}
           <div className="footer-brand">
             <div className="brand-logo-row">
@@ -73,7 +73,7 @@ export default function Footer() {
                 <Linkedin size={18} />
               </a>
               <a
-                href="mailto:sayyedkashaf.ds@gmail.com"
+                href="mailto:kashafsayyed2008@gmail.com"
                 className="footer-social-btn"
                 aria-label="Email"
               >
@@ -93,7 +93,7 @@ export default function Footer() {
 
         </div>
 
-        <div className="footer-bottom-row">
+        <div className="footer-bottom-row" data-reveal style={{ '--rd': '120ms' }}>
           <p className="copyright-text">
             &copy; {new Date().getFullYear()} Sayyed Kashaf. Designed &amp; built with modern React &amp; Vite.
           </p>

@@ -1,14 +1,5 @@
 import React from 'react';
-import { 
-  GraduationCap, 
-  MapPin, 
-  Code2, 
-  BrainCircuit, 
-  ShieldCheck, 
-  Layers, 
-  Sparkles, 
-  CheckCircle2 
-} from 'lucide-react';
+import { GraduationCap, MapPin, Code2, BrainCircuit, ShieldCheck, Layers, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export default function About() {
   const pillars = [
@@ -37,8 +28,8 @@ export default function About() {
   return (
     <section id="about" className="section about-section">
       <div className="container">
-        
-        <div className="section-header">
+
+        <div className="section-header" data-reveal>
           <div className="section-tag">
             <span>01 // About Me</span>
           </div>
@@ -46,26 +37,25 @@ export default function About() {
             Passionate About Practical <span className="gradient-text">Problem Solving</span>
           </h2>
           <p className="section-subtitle">
-            A student-focused portfolio centered on authentic coursework, active technical curiosity, 
+            A student-focused portfolio centered on authentic coursework, active technical curiosity,
             and hands-on software development.
           </p>
         </div>
 
         <div className="about-grid">
-          {/* Main Narrative Card */}
-          <div className="about-narrative-card glass-card">
+          <div className="about-narrative-card glass-card" data-reveal style={{ '--rd': '100ms' }}>
             <h3 className="narrative-heading">
               My Journey in Data Science
             </h3>
             <p className="narrative-text">
-              I am currently pursuing a <strong>B.Sc. in Data Science at SDBI (Mumbai University)</strong>, 
-              graduating in 2028. My learning journey combines rigorous data analysis, programming, 
+              I am currently pursuing a <strong>B.Sc. in Data Science at SDBI (Mumbai University)</strong>,
+              graduating in 2028. My learning journey combines rigorous data analysis, programming,
               visualization, machine learning fundamentals, and backend software engineering.
             </p>
             <p className="narrative-text">
-              I strongly believe that the most effective way to understand complex technical concepts 
-              is by <em>learning by building</em>. This mindset has driven me to build practical projects 
-              spanning data pipelines, REST APIs, AI-powered recommendation systems, web protection tools, 
+              I strongly believe that the most effective way to understand complex technical concepts
+              is by <em>learning by building</em>. This mindset has driven me to build practical projects
+              spanning data pipelines, REST APIs, AI-powered recommendation systems, web protection tools,
               and threat intelligence correlators.
             </p>
 
@@ -84,7 +74,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* Quick Metadata chips */}
             <div className="about-meta-row">
               <div className="meta-badge">
                 <GraduationCap size={16} />
@@ -101,10 +90,9 @@ export default function About() {
             </div>
           </div>
 
-          {/* Pillars List */}
           <div className="about-pillars-column">
             {pillars.map((pillar, idx) => (
-              <div key={idx} className="pillar-card glass-card">
+              <div key={idx} className="pillar-card glass-card" data-reveal style={{ '--rd': `${150 + idx * 110}ms` }}>
                 <div className="pillar-header">
                   <div className="pillar-icon-box">
                     {pillar.icon}

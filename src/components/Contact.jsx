@@ -21,7 +21,7 @@ export default function Contact() {
     message: ''
   });
 
-  const emailAddress = "sayyedkashaf.ds@gmail.com";
+  const emailAddress = "kashafsayyed2008@gmail.com";
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailAddress);
@@ -49,7 +49,7 @@ export default function Contact() {
     <section id="contact" className="section contact-section">
       <div className="container">
         
-        <div className="section-header">
+        <div className="section-header" data-reveal>
           <h2 className="section-title">
             Let's <span className="gradient-text">Connect</span>
           </h2>
@@ -64,7 +64,7 @@ export default function Contact() {
           {/* Left Column: Direct Contact Info */}
           <div className="contact-info-column">
             
-            <div className="contact-card-box glass-card">
+            <div className="contact-card-box glass-card" data-reveal>
               <h3 className="contact-box-title">Get in Touch Directly</h3>
               <p className="contact-box-subtitle">
                 I'm actively seeking <strong>data science internships, student research, and tech collaborations</strong>. 
@@ -144,7 +144,7 @@ export default function Contact() {
 
           {/* Right Column: Contact Form */}
           <div className="contact-form-column">
-            <div className="contact-form-card glass-card">
+            <div className="contact-form-card glass-card" data-reveal style={{ '--rd': '140ms' }}>
               <h3 className="form-card-title">Send a Direct Message</h3>
               <p className="form-card-desc">
                 Fill out this quick form to drop a note or inquiry.

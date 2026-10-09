@@ -7,14 +7,14 @@
 :root {
   --u: calc(100vw / 1600);
 
-  --ink:            #ffffff;
-  --ink-soft:       rgba(255, 255, 255, 0.72);
-  --ink-faint:      rgba(255, 255, 255, 0.48);
-  --rule:           rgba(255, 255, 255, 0.065);
+  --ink:            #f8fafc;
+  --ink-soft:       rgba(248, 250, 252, 0.72);
+  --ink-faint:      rgba(248, 250, 252, 0.48);
+  --rule:           rgba(255, 255, 255, 0.07);
 
-  --card:           #f2f3ef;
-  --card-ink:       #1e241c;
-  --card-label:     #677063;
+  --card:           rgba(16, 26, 48, 0.78);
+  --card-ink:       #f8fafc;
+  --card-label:     #94a3b8;
 
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-out: cubic-bezier(.16, 1, .3, 1);
@@ -29,10 +29,10 @@
 .sylva-hero-wrapper {
   position: relative;
   width: 100%;
-  font-family: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-sans);
   font-weight: 300;
   color: var(--ink);
-  background: #383b34;
+  background: transparent;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -47,9 +47,9 @@
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(64% 52% at 27% 84%, rgba(232, 238, 222, 0.085) 0%, rgba(232, 238, 222, 0) 72%),
-    radial-gradient(70% 60% at 92% 8%,  rgba(24, 28, 20, 0.12) 0%, rgba(24, 28, 20, 0) 68%),
-    #41463c;
+    radial-gradient(64% 52% at 27% 84%, rgba(20, 184, 166, 0.12) 0%, rgba(20, 184, 166, 0) 72%),
+    radial-gradient(70% 60% at 92% 8%,  rgba(14, 165, 233, 0.09) 0%, rgba(14, 165, 233, 0) 68%),
+    transparent;
 }
 
 /* Light pool floor */
@@ -58,8 +58,8 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(72% 44% at 50% 117%, rgba(238, 243, 231, 0.50) 0%, rgba(238, 243, 231, 0.21) 42%, rgba(238, 243, 231, 0.04) 72%, rgba(238, 243, 231, 0) 88%),
-    linear-gradient(180deg, rgba(238, 243, 231, 0) 54%, rgba(238, 243, 231, 0.03) 78%, rgba(238, 243, 231, 0.085) 100%);
+    radial-gradient(72% 44% at 50% 117%, rgba(20, 184, 166, 0.24) 0%, rgba(20, 184, 166, 0.09) 42%, rgba(20, 184, 166, 0.02) 72%, rgba(20, 184, 166, 0) 88%),
+    linear-gradient(180deg, rgba(20, 184, 166, 0) 54%, rgba(20, 184, 166, 0.035) 78%, rgba(20, 184, 166, 0.08) 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -146,10 +146,12 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 42%),
-    rgba(34, 40, 31, 0.85);
+    var(--bg-glass);
   box-shadow:
-    0 calc(8 * var(--u)) calc(24 * var(--u)) rgba(10, 14, 8, 0.35),
+    0 calc(8 * var(--u)) calc(24 * var(--u)) rgba(2, 8, 20, 0.45),
     inset 0 1px rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   isolation: isolate;
   position: relative;
 }
@@ -185,8 +187,8 @@
   z-index: 7;
   color: var(--ink);
   border-color: rgba(255, 255, 255, 0.22);
-  background: rgba(31, 37, 28, 0.96);
-  box-shadow: 0 calc(7 * var(--u)) calc(16 * var(--u)) rgba(10, 14, 8, 0.32);
+  background: var(--bg-card-hover);
+  box-shadow: 0 calc(7 * var(--u)) calc(16 * var(--u)) rgba(2, 8, 20, 0.40);
 }
 
 .sylva-dock-item .dock-glyph {
@@ -218,29 +220,29 @@
 .sylva-dock-mark {
   width: calc(38 * var(--u));
   padding: 0;
-  background: #eef1e7;
-  border-color: #eef1e7;
-  color: #1e241c;
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: #080d1a;
   font-weight: 700;
   font-size: calc(13 * var(--u));
   overflow: hidden;
 }
 
 .sylva-dock-mark[data-near="true"] {
-  background: #ffffff;
-  border-color: #ffffff;
-  color: #11140e;
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #080d1a;
 }
 
 .sylva-dock-item.is-active {
-  background: var(--card);
-  border-color: var(--card);
-  color: var(--card-ink);
-  box-shadow: 0 calc(6 * var(--u)) calc(16 * var(--u)) rgba(12, 17, 9, 0.25);
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: #080d1a;
+  box-shadow: 0 calc(6 * var(--u)) calc(16 * var(--u)) var(--accent-glow);
 }
 
 .sylva-dock-item.is-active .dock-glyph {
-  opacity: .9;
+  opacity: 1;
 }
 
 .sylva-dock-item--cta {
@@ -271,10 +273,10 @@
   pointer-events: none;
   opacity: var(--spec-bright);
   background: conic-gradient(from var(--spec-angle) at 50% 50%,
-    rgba(240, 246, 232, 0) 0deg, rgba(240, 246, 232, 0.08) 14deg, rgba(240, 246, 232, 0.95) 28deg,
-    rgba(240, 246, 232, 0.16) 46deg, rgba(240, 246, 232, 0) 68deg, rgba(240, 246, 232, 0) 180deg,
-    rgba(240, 246, 232, 0.08) 194deg, rgba(240, 246, 232, 0.95) 208deg, rgba(240, 246, 232, 0.16) 226deg,
-    rgba(240, 246, 232, 0) 248deg, rgba(240, 246, 232, 0) 360deg);
+    rgba(45, 212, 191, 0) 0deg, rgba(45, 212, 191, 0.08) 14deg, rgba(45, 212, 191, 0.95) 28deg,
+    rgba(45, 212, 191, 0.16) 46deg, rgba(45, 212, 191, 0) 68deg, rgba(45, 212, 191, 0) 180deg,
+    rgba(45, 212, 191, 0.08) 194deg, rgba(45, 212, 191, 0.95) 208deg, rgba(45, 212, 191, 0.16) 226deg,
+    rgba(45, 212, 191, 0) 248deg, rgba(45, 212, 191, 0) 360deg);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
           mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
@@ -287,6 +289,7 @@
   z-index: 4;
   left: calc(46 * var(--u));
   top: calc(196 * var(--u));
+  font-family: var(--font-display);
   font-size: calc(61 * var(--u));
   line-height: calc(64 * var(--u));
   font-weight: 300;
@@ -585,9 +588,12 @@
 .sylva-card {
   position: absolute;
   background: var(--card);
+  border: 1px solid var(--border-subtle);
   border-radius: calc(46 * var(--u));
-  box-shadow: 0 calc(30 * var(--u)) calc(70 * var(--u)) rgba(16, 21, 13, 0.30);
-  transition: box-shadow .8s var(--ease);
+  box-shadow: 0 calc(30 * var(--u)) calc(70 * var(--u)) rgba(2, 8, 20, 0.40);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: box-shadow .8s var(--ease), border-color .8s var(--ease);
 }
 
 .sylva-card--about {
@@ -649,7 +655,7 @@
   border-radius: calc(34 * var(--u));
   overflow: hidden;
   isolation: isolate;
-  background: #263025;
+  background: var(--bg-secondary);
 }
 
 .sylva-card--stove figure {
@@ -743,14 +749,14 @@
   bottom: calc(20 * var(--u));
   width: calc(58 * var(--u));
   height: calc(58 * var(--u));
-  border: 0;
+  border: 1px solid var(--border-subtle);
   border-radius: 50%;
   cursor: pointer;
-  background: #fbfcf8;
+  background: var(--bg-card);
   display: grid;
   place-items: center;
-  box-shadow: 0 calc(6 * var(--u)) calc(16 * var(--u)) rgba(16, 21, 13, 0.18);
-  transition: transform .5s var(--ease-out), background .4s var(--ease);
+  box-shadow: 0 calc(6 * var(--u)) calc(16 * var(--u)) rgba(2, 8, 20, 0.35);
+  transition: transform .5s var(--ease-out), background .4s var(--ease), border-color .4s var(--ease);
 }
 
 .sylva-knob--about {
@@ -770,17 +776,18 @@
   width: calc(19 * var(--u));
   height: calc(19 * var(--u));
   display: block;
-  color: #3f453a;
+  color: var(--accent-primary);
 }
 
 .sylva-card .sylva-knob:hover,
 .sylva-knob--about:hover {
   transform: scale(1.1) rotate(8deg);
-  background: #fff;
+  background: var(--bg-card-hover);
+  border-color: var(--badge-border);
 }
 
 .sylva-card:hover {
-  box-shadow: 0 calc(38 * var(--u)) calc(84 * var(--u)) rgba(16, 21, 13, 0.36);
+  box-shadow: 0 calc(38 * var(--u)) calc(84 * var(--u)) rgba(2, 8, 20, 0.48);
 }
 
 /* ── scroll cue (z 4) ────────────────────────────────────────────────── */
@@ -936,8 +943,8 @@
   }
   .sylva-hero::after {
     background:
-      radial-gradient(90% 30% at 50% 74%, rgba(238, 243, 231, 0.40) 0%, rgba(238, 243, 231, 0.14) 46%, rgba(238, 243, 231, 0) 82%),
-      linear-gradient(180deg, rgba(238, 243, 231, 0) 62%, rgba(238, 243, 231, 0.05) 100%);
+      radial-gradient(90% 30% at 50% 74%, rgba(20, 184, 166, 0.22) 0%, rgba(20, 184, 166, 0.08) 46%, rgba(20, 184, 166, 0) 82%),
+      linear-gradient(180deg, rgba(20, 184, 166, 0) 62%, rgba(20, 184, 166, 0.04) 100%);
   }
   .sylva-guides i:nth-child(3) { display: none; }
   .sylva-guides i:nth-child(1) { left: calc(253 * var(--u)) !important; }
@@ -1039,4 +1046,131 @@
     bottom: calc(660 * var(--u));
     left: calc(-10 * var(--u));
   }
+}
+
+/* ── light theme adaptation ─────────────────────────────────────── */
+[data-theme='light'] .sylva-hero-wrapper {
+  --ink: #0f172a;
+  --ink-soft: rgba(15, 23, 42, 0.72);
+  --ink-faint: rgba(15, 23, 42, 0.52);
+  --rule: rgba(15, 23, 42, 0.09);
+  --card: rgba(255, 255, 255, 0.82);
+  --card-ink: #0f172a;
+  --card-label: #475569;
+}
+
+[data-theme='light'] .sylva-hero {
+  background:
+    radial-gradient(64% 52% at 27% 84%, rgba(13, 148, 136, 0.10) 0%, rgba(13, 148, 136, 0) 72%),
+    radial-gradient(70% 60% at 92% 8%, rgba(8, 145, 178, 0.08) 0%, rgba(8, 145, 178, 0) 68%),
+    transparent;
+}
+
+[data-theme='light'] .sylva-hero::after {
+  background:
+    radial-gradient(72% 44% at 50% 117%, rgba(13, 148, 136, 0.16) 0%, rgba(13, 148, 136, 0.06) 42%, rgba(13, 148, 136, 0.015) 72%, rgba(13, 148, 136, 0) 88%),
+    linear-gradient(180deg, rgba(13, 148, 136, 0) 54%, rgba(13, 148, 136, 0.03) 78%, rgba(13, 148, 136, 0.06) 100%);
+}
+
+[data-theme='light'] .sylva-ghost {
+  color: rgba(15, 23, 42, 0.05);
+}
+
+[data-theme='light'] .sylva-dock {
+  border-color: rgba(15, 23, 42, 0.14);
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.04), rgba(15, 23, 42, 0) 42%),
+    rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 calc(8 * var(--u)) calc(24 * var(--u)) rgba(15, 23, 42, 0.14),
+    inset 0 1px rgba(255, 255, 255, 0.65);
+}
+
+[data-theme='light'] .sylva-dock-item {
+  background: rgba(15, 23, 42, 0.04);
+}
+
+[data-theme='light'] .sylva-dock-item[data-near="true"] {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.20);
+  box-shadow: 0 calc(7 * var(--u)) calc(16 * var(--u)) rgba(15, 23, 42, 0.14);
+}
+
+[data-theme='light'] [data-spec]::after {
+  background: conic-gradient(from var(--spec-angle) at 50% 50%,
+    rgba(13, 148, 136, 0) 0deg, rgba(13, 148, 136, 0.06) 14deg, rgba(13, 148, 136, 0.70) 28deg,
+    rgba(13, 148, 136, 0.13) 46deg, rgba(13, 148, 136, 0) 68deg, rgba(13, 148, 136, 0) 180deg,
+    rgba(13, 148, 136, 0.06) 194deg, rgba(13, 148, 136, 0.70) 208deg, rgba(13, 148, 136, 0.13) 226deg,
+    rgba(13, 148, 136, 0) 248deg, rgba(13, 148, 136, 0) 360deg);
+}
+
+[data-theme='light'] .sylva-card {
+  box-shadow: 0 calc(30 * var(--u)) calc(70 * var(--u)) rgba(15, 23, 42, 0.16);
+  border-color: rgba(15, 23, 42, 0.10);
+}
+
+[data-theme='light'] .sylva-card:hover {
+  box-shadow: 0 calc(38 * var(--u)) calc(84 * var(--u)) rgba(15, 23, 42, 0.20);
+}
+
+[data-theme='light'] .sylva-card figure {
+  background: #f1f5f9;
+}
+
+[data-theme='light'] .sylva-knob,
+[data-theme='light'] .sylva-card .sylva-knob {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.10);
+  box-shadow: 0 calc(6 * var(--u)) calc(16 * var(--u)) rgba(15, 23, 42, 0.14);
+}
+
+[data-theme='light'] .sylva-card .sylva-knob:hover,
+[data-theme='light'] .sylva-knob--about:hover {
+  background: #ffffff;
+  border-color: var(--badge-border);
+}
+
+[data-theme='light'] .sylva-stat dt,
+[data-theme='light'] .sylva-stat dd {
+  text-shadow: none;
+}
+
+[data-theme='light'] .sylva-scroll {
+  color: rgba(15, 23, 42, 0.55);
+}
+
+[data-theme='light'] .sylva-scroll .track {
+  background: rgba(15, 23, 42, 0.18);
+}
+
+[data-theme='light'] .sylva-scroll .track::after {
+  background: rgba(15, 23, 42, 0.70);
+}
+
+[data-theme='light'] .liquid-plate {
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.05), rgba(15, 23, 42, 0.01) 44%, rgba(15, 23, 42, 0) 64%),
+    rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 calc(var(--h) * 0.08) calc(var(--h) * 0.18) rgba(15, 23, 42, 0.18),
+    0 calc(var(--h) * 0.24) calc(var(--h) * 0.50) rgba(15, 23, 42, 0.14),
+    0 calc(var(--h) * 0.48) calc(var(--h) * 0.96) rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 calc(var(--h) * -0.02) calc(var(--h) * 0.05) rgba(15, 23, 42, 0.04);
+}
+
+[data-theme='light'] .liquid-stage.hot .liquid-plate {
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.06), rgba(15, 23, 42, 0.015) 44%, rgba(15, 23, 42, 0) 64%),
+    rgba(255, 255, 255, 0.65);
+}
+
+[data-theme='light'] .liquid-stage.press .liquid-plate {
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.04), rgba(15, 23, 42, 0.01) 44%, rgba(15, 23, 42, 0) 64%),
+    rgba(255, 255, 255, 0.50);
+}
+
+[data-theme='light'] .liquid-button {
+  color: #0f172a;
 }

@@ -371,14 +371,20 @@ main {
    Navbar Component Styles
    ========================================================================== */
 .navbar-wrapper {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: var(--header-height);
   z-index: 100;
   background: transparent;
-  transition: all var(--transition-normal);
+  transform: translateY(-110%);
+  transition: transform var(--transition-normal), background var(--transition-normal), box-shadow var(--transition-normal);
+  will-change: transform;
+}
+
+.navbar-wrapper.visible {
+  transform: translateY(0);
 }
 
 .navbar-wrapper.scrolled {
@@ -1779,8 +1785,7 @@ main {
 
 /* ==========================================================================
    Footer Component Styles
-   ========================================================================== */
-.footer {
+   ========================================================================== */.footer {
   background: var(--bg-secondary);
   border-top: 1px solid var(--border-subtle);
   padding: 4.5rem 0 2rem;
@@ -2165,4 +2170,181 @@ main {
     padding: 0;
     box-shadow: none;
   }
+}
+
+/* ==========================================================================
+   Global Interactive Polish (v2)
+   ========================================================================== */
+
+/* ── Reading progress bar ───────────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  z-index: 300;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: var(--accent-gradient);
+  box-shadow: 0 0 12px var(--accent-glow);
+  transition: width 90ms linear;
+}
+
+/* ── Pointer-following ambient glow ─────────────────────────────── */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 62%);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 2;
+  filter: blur(6px);
+}
+
+[data-theme='light'] .cursor-glow {
+  opacity: 0.4;
+}
+
+/* ── Reveal-on-scroll ───────────────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.85s var(--transition-normal) var(--rd, 0ms),
+    transform 0.85s cubic-bezier(0.22, 0.61, 0.36, 1) var(--rd, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .ticker-track {
+    animation: none;
+  }
+}
+
+/* ── Section hairline divider for visual cohesion ───────────────── */
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(var(--max-width), 100% - 3rem);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-medium), transparent);
+  pointer-events: none;
+}
+
+/* ── Skill ticker marquee ───────────────────────────────────────── */
+.skill-ticker {
+  overflow: hidden;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 1.15rem 0;
+  background: var(--bg-secondary);
+  position: relative;
+  z-index: 1;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 38s linear infinite;
+}
+
+.skill-ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+.ticker-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding-right: 0.7rem;
+}
+
+@keyframes ticker-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ── 3D tilt + spotlight glow for project cards ─────────────────── */
+.tilt-card {
+  transform: perspective(950px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition:
+    transform var(--transition-normal) ease-out,
+    border-color var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+.tilt-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%), var(--accent-glow), transparent 65%);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tilt-card:hover::before {
+  opacity: 1;
+}
+
+.tilt-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Custom scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-card-hover);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-card-hover) var(--bg-primary);
+}
+
+/* ── Selection ──────────────────────────────────────────────────── */
+::selection {
+  background: var(--accent-primary);
+  color: #080d1a;
 }

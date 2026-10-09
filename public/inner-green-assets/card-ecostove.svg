@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="800" height="900">
+  <defs>
+    <filter id="mist">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" stitchTiles="stitch"/>
+      <feDisplacementMap in2="SourceGraphic" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <rect width="800" height="900" fill="#1e2e1e"/>
+  <g opacity="0.14">
+    <ellipse cx="400" cy="650" rx="250" ry="100" fill="#2a422a"/>
+    <ellipse cx="380" cy="670" rx="220" ry="85" fill="#334d33"/>
+    <ellipse cx="420" cy="690" rx="200" ry="75" fill="#3a5a3a"/>
+  </g>
+  <path d="M150 700 Q240 640 330 720 Q400 780 490 740 Q580 700 660 770 Q730 830 800 800 L800 900 L150 900 Z" fill="#4a734a" opacity="0.16"/>
+  <path d="M180 680 Q270 620 360 700 Q430 760 520 720 Q600 680 680 750 Q750 810 800 790 L800 900 L180 900 Z" fill="#5a8a5a" opacity="0.12"/>
+  <path d="M120 750 Q210 690 300 770 Q380 830 470 790 Q550 750 630 820 Q700 880 770 850 L770 900 L120 900 Z" fill="#3a6a3a" opacity="0.1"/>
+  <g opacity="0.07">
+    <circle cx="320" cy="280" r="70" fill="#2a4a2a"/>
+    <circle cx="420" cy="230" r="55" fill="#3a5a3a"/>
+    <circle cx="520" cy="300" r="45" fill="#4a734a"/>
+    <ellipse cx="280" cy="400" rx="100" ry="50" fill="#3a6a3a"/>
+    <ellipse cx="460" cy="460" rx="80" ry="40" fill="#4a7a4a"/>
+    <ellipse cx="600" cy="380" rx="65" ry="32" fill="#3a5a3a"/>
+  </g>
+  <g opacity="0.06">
+    <circle cx="680" cy="180" r="90" fill="#2a4a2a"/>
+    <circle cx="740" cy="250" r="60" fill="#3a5a3a"/>
+    <circle cx="780" cy="140" r="35" fill="#4a7a4a"/>
+    <ellipse cx="640" cy="360" rx="120" ry="60" fill="#3a5a3a"/>
+    <ellipse cx="800" cy="310" rx="80" ry="40" fill="#4a734a"/>
+  </g>
+  <path d="M100 340 Q190 280 280 360 Q350 420 440 380 Q530 340 600 410 Q670 470 740 430 Q800 470 800 470 L800 900 L100 900 Z" fill="#5a8a5a" opacity="0.1"/>
+  <g opacity="0.03">
+    <circle cx="120" cy="200" r="50" fill="#3a5a3a"/>
+    <circle cx="200" cy="150" r="30" fill="#4a734a"/>
+    <circle cx="480" cy="150" r="40" fill="#2a4a2a"/>
+    <circle cx="560" cy="100" r="25" fill="#3a6a3a"/>
+    <circle cx="700" cy="120" r="35" fill="#4a7a4a"/>
+    <circle cx="580" cy="560" r="60" fill="#3a5a3a"/>
+    <circle cx="240" cy="480" r="45" fill="#2a4a2a"/>
+  </g>
+</svg>

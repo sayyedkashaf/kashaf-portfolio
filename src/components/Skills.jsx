@@ -1,14 +1,6 @@
 import React from 'react';
 import { skillGroups } from '../data/skills';
-import { 
-  Database, 
-  BarChart3, 
-  Server, 
-  Cpu, 
-  ShieldCheck, 
-  CheckCircle2, 
-  Sparkles 
-} from 'lucide-react';
+import { Database, BarChart3, Server, Cpu, ShieldCheck, CheckCircle2, Sparkles } from 'lucide-react';
 
 export default function Skills() {
   const getGroupIcon = (iconName) => {
@@ -31,8 +23,8 @@ export default function Skills() {
   return (
     <section id="skills" className="section skills-section">
       <div className="container">
-        
-        <div className="section-header">
+
+        <div className="section-header" data-reveal>
           <div className="section-tag">
             <span>05 // Technical Arsenal</span>
           </div>
@@ -40,14 +32,14 @@ export default function Skills() {
             Skills &amp; <span className="gradient-text">Competencies</span>
           </h2>
           <p className="section-subtitle">
-            Grouped technical toolsets supported directly by ongoing coursework at Mumbai University 
+            Grouped technical toolsets supported directly by ongoing coursework at Mumbai University
             and implemented within public GitHub projects.
           </p>
         </div>
 
         <div className="skills-grid">
           {skillGroups.map((group, idx) => (
-            <div key={idx} className="skill-group-card glass-card">
+            <div key={idx} className="skill-group-card glass-card" data-reveal style={{ '--rd': `${idx * 110}ms` }}>
               <div className="group-header">
                 <div className="group-icon-box">
                   {getGroupIcon(group.icon)}
@@ -73,11 +65,10 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Academic Grounding Assurance */}
-        <div className="skills-footnote glass-card">
+        <div className="skills-footnote glass-card" data-reveal>
           <CheckCircle2 size={18} className="footnote-icon" />
           <p>
-            <strong>Evidence-Based Profile:</strong> All listed proficiencies correspond to active 
+            <strong>Evidence-Based Profile:</strong> All listed proficiencies correspond to active
             undergraduate coursework, laboratory modules, or codebases featured in the project showcase.
           </p>
         </div>

@@ -1,21 +1,11 @@
 import React from 'react';
-import { 
-  ArrowRight, 
-  Mail, 
-  Github, 
-  Linkedin, 
-  Terminal, 
-  Sparkles, 
-  Database, 
-  ShieldCheck, 
-  ExternalLink 
-} from 'lucide-react';
+import { ArrowRight, Mail, Github, Linkedin, Terminal, Sparkles, Database, ShieldCheck, ExternalLink } from 'lucide-react';
 
-export default function Hero() {
+export default function Hero({ onOpenResume, theme, toggleTheme }) {
   return (
     <section id="hero" className="hero-section">
       <div className="container hero-container">
-        
+
         {/* Left Column: Text & CTAs */}
         <div className="hero-content">
           <div className="status-badge">
@@ -28,19 +18,19 @@ export default function Hero() {
           </h1>
 
           <p className="hero-headline">
-            Building with Data, AI &amp; Modern Technology.
+            Data Science Student &amp; Developer
           </p>
 
           <p className="hero-description">
-            I'm a B.Sc. Data Science student based in Mumbai, focused on turning data and 
-            technology into practical, reliable solutions. I enjoy working with Python, SQL, 
-            data visualization, AI tools, and backend engineering while continuously sharpening 
+            I'm a B.Sc. Data Science student based in Mumbai, focused on turning data and
+            technology into practical, reliable solutions. I enjoy working with Python, SQL,
+            data visualization, AI tools, and backend engineering while continuously sharpening
             my problem-solving skills through hands-on open-source projects.
           </p>
 
           <div className="hero-cta-group">
             <a href="#projects" className="btn btn-primary hero-btn">
-              <span>View Practical Projects</span>
+              <span>View My Work</span>
               <ArrowRight size={18} />
             </a>
             <a href="#contact" className="btn btn-secondary hero-btn">
@@ -104,7 +94,7 @@ export default function Hero() {
                   {"        "}<span className="token-self">self</span>.interests = [&#10;
                   {"            "}<span className="token-string">"Data Analysis"</span>,&#10;
                   {"            "}<span className="token-string">"GenAI & Vector Search"</span>,&#10;
-                  {"            "}<span className="token-string">"FastAPI Microservices"</span>,&#10;
+                  {"            "}<span className="token-string">"REST API Development"</span>,&#10;
                   {"            "}<span className="token-string">"Defensive Cybersecurity"</span>&#10;
                   {"        "}]{"\n\n"}
                   {"    "}<span className="token-keyword">def</span> <span className="token-function">current_philosophy</span>(<span className="token-self">self</span>):{"\n"}
