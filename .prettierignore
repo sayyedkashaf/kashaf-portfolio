@@ -1,0 +1,7 @@
+dist/
+node_modules/
+*.config.js
+*.lock
+.env*
+coverage/
+.DS_Store

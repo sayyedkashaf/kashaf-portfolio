@@ -4,7 +4,7 @@ import { Github, ExternalLink, Check, Sparkles, ShieldCheck, Server, Layers } fr
 export default function ProjectCard({ project, index = 0 }) {
   const cardRef = useRef(null);
 
-  const getCategoryIcon = (category) => {
+  const getCategoryIcon = category => {
     switch (category) {
       case 'AI / Data':
         return <Sparkles size={14} />;
@@ -17,7 +17,7 @@ export default function ProjectCard({ project, index = 0 }) {
     }
   };
 
-  const handlePointerMove = (e) => {
+  const handlePointerMove = e => {
     const el = cardRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -46,7 +46,6 @@ export default function ProjectCard({ project, index = 0 }) {
       onPointerLeave={handlePointerLeave}
     >
       <div className="project-card-inner">
-
         <div className="project-header">
           <span className="project-badge">
             {getCategoryIcon(project.category)}
@@ -110,7 +109,6 @@ export default function ProjectCard({ project, index = 0 }) {
             <ExternalLink size={13} className="ext-icon" />
           </a>
         </div>
-
       </div>
     </article>
   );

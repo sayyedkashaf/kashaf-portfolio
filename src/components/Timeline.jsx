@@ -6,7 +6,6 @@ export default function Timeline() {
   return (
     <section id="education" className="section education-section">
       <div className="container">
-
         <div className="section-header" data-reveal>
           <div className="section-tag">
             <span>03 // Academic Timeline</span>
@@ -26,8 +25,12 @@ export default function Timeline() {
           {timelineData.map((item, index) => {
             const isEducation = item.type === 'education';
             return (
-              <div key={index} className="timeline-item" data-reveal style={{ '--rd': `${index * 140}ms` }}>
-
+              <div
+                key={index}
+                className="timeline-item"
+                data-reveal
+                style={{ '--rd': `${index * 140}ms` }}
+              >
                 <div className="timeline-node">
                   {isEducation ? (
                     <GraduationCap size={20} className="node-icon" />
@@ -77,12 +80,10 @@ export default function Timeline() {
                     <span className="timeline-status-tag">{item.status}</span>
                   </div>
                 </div>
-
               </div>
             );
           })}
         </div>
-
       </div>
     </section>
   );

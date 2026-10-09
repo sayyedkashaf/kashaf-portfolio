@@ -1,15 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  Mail, 
-  Linkedin, 
-  Github, 
-  Copy, 
-  Check, 
-  Send, 
-  MapPin, 
-  Clock, 
-  Sparkles 
-} from 'lucide-react';
+import { Mail, Linkedin, Github, Copy, Check, Send, MapPin, Clock, Sparkles } from 'lucide-react';
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
@@ -18,10 +8,10 @@ export default function Contact() {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   });
 
-  const emailAddress = "kashafsayyed2008@gmail.com";
+  const emailAddress = 'kashafsayyed2008@gmail.com';
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailAddress);
@@ -29,14 +19,14 @@ export default function Contact() {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     // Simulate submission / mailto preparation
     setFormSubmitted(true);
@@ -48,27 +38,25 @@ export default function Contact() {
   return (
     <section id="contact" className="section contact-section">
       <div className="container">
-        
         <div className="section-header" data-reveal>
           <h2 className="section-title">
             Let's <span className="gradient-text">Connect</span>
           </h2>
           <p className="section-subtitle">
-            Whether you have an internship opportunity, a project to collaborate on, 
-            or want to talk about data science and AI — feel free to reach out!
+            Whether you have an internship opportunity, a project to collaborate on, or want to talk
+            about data science and AI — feel free to reach out!
           </p>
         </div>
 
         <div className="contact-grid">
-          
           {/* Left Column: Direct Contact Info */}
           <div className="contact-info-column">
-            
             <div className="contact-card-box glass-card" data-reveal>
               <h3 className="contact-box-title">Get in Touch Directly</h3>
               <p className="contact-box-subtitle">
-                I'm actively seeking <strong>data science internships, student research, and tech collaborations</strong>. 
-                I respond promptly to inquiries.
+                I'm actively seeking{' '}
+                <strong>data science internships, student research, and tech collaborations</strong>
+                . I respond promptly to inquiries.
               </p>
 
               {/* Email direct copy */}
@@ -137,18 +125,14 @@ export default function Contact() {
                   <span>IST (UTC +5:30)</span>
                 </div>
               </div>
-
             </div>
-
           </div>
 
           {/* Right Column: Contact Form */}
           <div className="contact-form-column">
             <div className="contact-form-card glass-card" data-reveal style={{ '--rd': '140ms' }}>
               <h3 className="form-card-title">Send a Direct Message</h3>
-              <p className="form-card-desc">
-                Fill out this quick form to drop a note or inquiry.
-              </p>
+              <p className="form-card-desc">Fill out this quick form to drop a note or inquiry.</p>
 
               {formSubmitted ? (
                 <div className="form-success-alert">
@@ -157,8 +141,8 @@ export default function Contact() {
                   </div>
                   <h4 className="success-title">Message Received!</h4>
                   <p className="success-desc">
-                    Thank you for reaching out, <strong>{formData.name || 'there'}</strong>. 
-                    I will get back to you shortly at <strong>{formData.email}</strong>.
+                    Thank you for reaching out, <strong>{formData.name || 'there'}</strong>. I will
+                    get back to you shortly at <strong>{formData.email}</strong>.
                   </p>
                   <button
                     onClick={() => {
@@ -243,18 +227,13 @@ export default function Contact() {
                       <Send size={16} />
                       <span>Send Message</span>
                     </button>
-                    <span className="privacy-note">
-                      Your information is used only to reply.
-                    </span>
+                    <span className="privacy-note">Your information is used only to reply.</span>
                   </div>
                 </form>
               )}
-
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );

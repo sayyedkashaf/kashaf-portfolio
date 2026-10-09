@@ -1,9 +1,18 @@
 import React from 'react';
 import { currentFocusList } from '../data/skills';
-import { TrendingUp, Terminal, Database, BarChart, Cpu, Server, ShieldAlert, Sparkles } from 'lucide-react';
+import {
+  TrendingUp,
+  Terminal,
+  Database,
+  BarChart,
+  Cpu,
+  Server,
+  ShieldAlert,
+  Sparkles,
+} from 'lucide-react';
 
 export default function CurrentFocus() {
-  const getIcon = (tag) => {
+  const getIcon = tag => {
     switch (tag) {
       case 'Core Foundation':
         return <Database size={20} />;
@@ -27,7 +36,6 @@ export default function CurrentFocus() {
   return (
     <section id="focus" className="section focus-section">
       <div className="container">
-
         <div className="section-header" data-reveal>
           <div className="section-tag">
             <span>02 // Continuous Growth</span>
@@ -43,11 +51,14 @@ export default function CurrentFocus() {
 
         <div className="focus-grid">
           {currentFocusList.map((item, index) => (
-            <div key={index} className="focus-card glass-card" data-reveal style={{ '--rd': `${(index % 3) * 110}ms` }}>
+            <div
+              key={index}
+              className="focus-card glass-card"
+              data-reveal
+              style={{ '--rd': `${(index % 3) * 110}ms` }}
+            >
               <div className="focus-top">
-                <div className="focus-icon-wrapper">
-                  {getIcon(item.tag)}
-                </div>
+                <div className="focus-icon-wrapper">{getIcon(item.tag)}</div>
                 <span className="focus-tag-chip">{item.tag}</span>
               </div>
               <h3 className="focus-title">{item.title}</h3>
@@ -59,7 +70,6 @@ export default function CurrentFocus() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

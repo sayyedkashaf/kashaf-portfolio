@@ -6,14 +6,12 @@ import { Github, FolderGit2, ArrowUpRight } from 'lucide-react';
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const filteredProjects = selectedCategory === 'All'
-    ? projects
-    : projects.filter((p) => p.category === selectedCategory);
+  const filteredProjects =
+    selectedCategory === 'All' ? projects : projects.filter(p => p.category === selectedCategory);
 
   return (
     <section id="projects" className="section projects-section">
       <div className="container">
-
         <div className="section-header" data-reveal>
           <div className="section-tag">
             <span>04 // Verifiable Code</span>
@@ -22,13 +20,13 @@ export default function Projects() {
             Featured Practical <span className="gradient-text">Projects</span>
           </h2>
           <p className="section-subtitle">
-            Authentic repositories built to explore machine learning embeddings,
-            defensive web engineering, threat intelligence, and high-performance APIs.
+            Authentic repositories built to explore machine learning embeddings, defensive web
+            engineering, threat intelligence, and high-performance APIs.
           </p>
         </div>
 
         <div className="project-filter-bar" data-reveal style={{ '--rd': '120ms' }}>
-          {projectCategories.map((category) => (
+          {projectCategories.map(category => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
@@ -38,7 +36,7 @@ export default function Projects() {
               <span className="filter-count">
                 {category === 'All'
                   ? projects.length
-                  : projects.filter((p) => p.category === category).length}
+                  : projects.filter(p => p.category === category).length}
               </span>
             </button>
           ))}
@@ -58,7 +56,8 @@ export default function Projects() {
             <div>
               <h3 className="banner-title">Looking for more experiment repositories?</h3>
               <p className="banner-subtitle">
-                Visit Kashaf's GitHub profile to explore codebases, commit histories, and setup scripts.
+                Visit Kashaf's GitHub profile to explore codebases, commit histories, and setup
+                scripts.
               </p>
             </div>
           </div>
@@ -73,7 +72,6 @@ export default function Projects() {
             <ArrowUpRight size={15} />
           </a>
         </div>
-
       </div>
     </section>
   );

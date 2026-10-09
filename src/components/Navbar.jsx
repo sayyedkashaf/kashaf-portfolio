@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Menu, 
-  X, 
-  Sun, 
-  Moon, 
-  FileText, 
-  Github, 
-  Linkedin, 
-  Terminal 
-} from 'lucide-react';
+import { Menu, X, Sun, Moon, FileText, Github, Linkedin, Terminal } from 'lucide-react';
 
 export default function Navbar({ theme, toggleTheme, onOpenResume }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,7 +13,7 @@ export default function Navbar({ theme, toggleTheme, onOpenResume }) {
     { name: 'Education', href: '#education' },
     { name: 'Projects', href: '#projects' },
     { name: 'Skills', href: '#skills' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Contact', href: '#contact' },
   ];
 
   useEffect(() => {
@@ -59,7 +50,9 @@ export default function Navbar({ theme, toggleTheme, onOpenResume }) {
   };
 
   return (
-    <header className={`navbar-wrapper ${isVisible ? 'visible' : ''} ${isScrolled ? 'scrolled' : ''}`}>
+    <header
+      className={`navbar-wrapper ${isVisible ? 'visible' : ''} ${isScrolled ? 'scrolled' : ''}`}
+    >
       <div className="container nav-container">
         {/* Brand / Logo */}
         <a href="#hero" className="nav-brand" onClick={() => setMobileMenuOpen(false)}>
@@ -74,7 +67,7 @@ export default function Navbar({ theme, toggleTheme, onOpenResume }) {
 
         {/* Desktop Navigation Links */}
         <nav className="nav-desktop-links" aria-label="Main Navigation">
-          {navLinks.map((link) => {
+          {navLinks.map(link => {
             const isActive = activeSection === link.href.replace('#', '');
             return (
               <a
@@ -145,7 +138,7 @@ export default function Navbar({ theme, toggleTheme, onOpenResume }) {
       <div className={`mobile-nav-drawer ${mobileMenuOpen ? 'open' : ''}`}>
         <div className="container mobile-nav-content">
           <div className="mobile-links-list">
-            {navLinks.map((link) => (
+            {navLinks.map(link => (
               <a
                 key={link.name}
                 href={link.href}

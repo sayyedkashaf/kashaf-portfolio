@@ -50,15 +50,17 @@ export default function App() {
   /* Reveal-on-scroll for all [data-reveal] elements */
   useEffect(() => {
     const elements = document.querySelectorAll('[data-reveal]');
-    if (!('IntersectionObserver' in window) ||
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      elements.forEach((el) => el.classList.add('is-revealed'));
+    if (
+      !('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      elements.forEach(el => el.classList.add('is-revealed'));
       return;
     }
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-revealed');
             observer.unobserve(entry.target);
@@ -68,12 +70,12 @@ export default function App() {
       { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     );
 
-    elements.forEach((el) => observer.observe(el));
+    elements.forEach(el => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
+    setTheme(prevTheme => (prevTheme === 'dark' ? 'light' : 'dark'));
   };
 
   return (
@@ -81,18 +83,10 @@ export default function App() {
       {/* Reading progress bar */}
       <ScrollProgress />
 
-      <Navbar
-        theme={theme}
-        toggleTheme={toggleTheme}
-        onOpenResume={() => setResumeOpen(true)}
-      />
+      <Navbar theme={theme} toggleTheme={toggleTheme} onOpenResume={() => setResumeOpen(true)} />
 
       <main>
-        <Hero
-          onOpenResume={() => setResumeOpen(true)}
-          theme={theme}
-          toggleTheme={toggleTheme}
-        />
+        <Hero onOpenResume={() => setResumeOpen(true)} theme={theme} toggleTheme={toggleTheme} />
         <SkillTicker />
         <About />
         <CurrentFocus />
@@ -104,10 +98,7 @@ export default function App() {
 
       <Footer />
 
-      <ResumeModal
-        isOpen={resumeOpen}
-        onClose={() => setResumeOpen(false)}
-      />
+      <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
     </div>
   );
 }

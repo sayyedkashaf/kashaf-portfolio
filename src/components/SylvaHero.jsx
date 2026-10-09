@@ -14,7 +14,7 @@ export function SylvaHero({
   headingLetterSpacing = -0.006,
   onOpenResume,
   theme,
-  toggleTheme
+  toggleTheme,
 }) {
   const containerRef = useRef(null);
 
@@ -56,7 +56,7 @@ export function SylvaHero({
         alpha: true,
         antialias: false,
         premultipliedAlpha: true,
-        powerPreference: 'high-performance'
+        powerPreference: 'high-performance',
       });
       if (!gl) return null;
 
@@ -105,7 +105,9 @@ vec2 pointerWarp(vec2 p){
   return normalize(p - uPtr.xy + vec2(1e-5)) * w * (uPtrK.y + uPtrK.z * uPtr.w);
 }`;
 
-      const FRAG_RIM = HEAD + `
+      const FRAG_RIM =
+        HEAD +
+        `
 uniform float uBw;
 uniform float uE[8];
 float perim(vec2 d, float a, float r){
@@ -149,7 +151,9 @@ void main(){
   ) * uE[1] * top * lift, 1.);
 }`;
 
-      const FRAG_SCENE = HEAD + `
+      const FRAG_SCENE =
+        HEAD +
+        `
 uniform float uP[21];
 float h21(vec2 p){
   vec3 p3 = fract(vec3(p.xyx) * 0.1031);
@@ -256,7 +260,9 @@ void main(){
   o = s;
 }`;
 
-      const FRAG_COMP = HEAD + `
+      const FRAG_COMP =
+        HEAD +
+        `
 uniform sampler2D uSoft, uRim, uGlow;
 uniform vec2  uRes;
 uniform float uGlowGain, uGlowIn, uOccl, uDim, uPunch;
@@ -300,8 +306,11 @@ void main(){
         return { p, u };
       }
 
-      const pScene = prog(FRAG_SCENE), pRim = prog(FRAG_RIM),
-            pDown  = prog(FRAG_DOWN),  pBlur = prog(FRAG_BLUR), pComp = prog(FRAG_COMP);
+      const pScene = prog(FRAG_SCENE),
+        pRim = prog(FRAG_RIM),
+        pDown = prog(FRAG_DOWN),
+        pBlur = prog(FRAG_BLUR),
+        pComp = prog(FRAG_COMP);
 
       const vao = gl.createVertexArray();
       gl.bindVertexArray(vao);
@@ -325,16 +334,26 @@ void main(){
       }
       function sizeTarget(t, w, h) {
         if (t.w === w && t.h === h) return;
-        t.w = w; t.h = h;
+        t.w = w;
+        t.h = h;
         gl.bindTexture(gl.TEXTURE_2D, t.tex);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
       }
 
-      const T_core = makeTarget(), T_rim = makeTarget(),
-            T_s1   = makeTarget(), T_s2  = makeTarget(),
-            T_a    = makeTarget(), T_b   = makeTarget();
+      const T_core = makeTarget(),
+        T_rim = makeTarget(),
+        T_s1 = makeTarget(),
+        T_s2 = makeTarget(),
+        T_a = makeTarget(),
+        T_b = makeTarget();
 
-      let W = 0, H = 0, DPR = 1, BW = 0, BH = 0, CX = 0, CY = 0;
+      let W = 0,
+        H = 0,
+        DPR = 1,
+        BW = 0,
+        BH = 0,
+        CX = 0,
+        CY = 0;
       let DOWN = 4;
       const GLOW_TEX = 129;
       let needResize = true;
@@ -345,20 +364,33 @@ void main(){
         DPR = Math.min(window.devicePixelRatio || 1, 2);
         const w = Math.max(2, Math.round(r.width * DPR));
         const h = Math.max(2, Math.round(r.height * DPR));
-        if (w !== W || h !== H) { W = w; H = h; cv.width = W; cv.height = H; }
-        BW = br.width * DPR; BH = br.height * DPR;
+        if (w !== W || h !== H) {
+          W = w;
+          H = h;
+          cv.width = W;
+          cv.height = H;
+        }
+        BW = br.width * DPR;
+        BH = br.height * DPR;
         CX = (br.left - r.left) * DPR + BW / 2;
         CY = H - ((br.top - r.top) * DPR + BH / 2);
-        sizeTarget(T_core, W, H); sizeTarget(T_rim, W, H);
-        const hw = Math.max(2, Math.ceil(W / 2)), hh = Math.max(2, Math.ceil(H / 2));
-        sizeTarget(T_s1, hw, hh); sizeTarget(T_s2, hw, hh);
+        sizeTarget(T_core, W, H);
+        sizeTarget(T_rim, W, H);
+        const hw = Math.max(2, Math.ceil(W / 2)),
+          hh = Math.max(2, Math.ceil(H / 2));
+        sizeTarget(T_s1, hw, hh);
+        sizeTarget(T_s2, hw, hh);
         DOWN = Math.max(1, Math.min(4, Math.round(BH / GLOW_TEX)));
-        const dw = Math.max(2, Math.ceil(W / DOWN)), dh = Math.max(2, Math.ceil(H / DOWN));
-        sizeTarget(T_a, dw, dh); sizeTarget(T_b, dw, dh);
+        const dw = Math.max(2, Math.ceil(W / DOWN)),
+          dh = Math.max(2, Math.ceil(H / DOWN));
+        sizeTarget(T_a, dw, dh);
+        sizeTarget(T_b, dw, dh);
         needResize = false;
       }
 
-      const resObs = new ResizeObserver(() => { needResize = true; });
+      const resObs = new ResizeObserver(() => {
+        needResize = true;
+      });
       resObs.observe(host);
 
       function drawTo(t) {
@@ -368,51 +400,100 @@ void main(){
       }
 
       const P = {
-        valFreq: 0.50, valAmp: 0.55, dens: 2.40, densVar: 2.20, densFreq: 0.32,
-        wobAmp: 0.12, wobFreq: 1.60, lift: 0.05, refract: 0.18, edge: 0.04,
-        width: 0.46, disp: 0.30, skew: 1.50, fineAmp: 0.0, fineFreq: 9.0,
-        gamma: 1.00, gain: 1.90, octGain: 0.32, litLo: -0.26, litHi: 0.10, dim: 0.44
+        valFreq: 0.5,
+        valAmp: 0.55,
+        dens: 2.4,
+        densVar: 2.2,
+        densFreq: 0.32,
+        wobAmp: 0.12,
+        wobFreq: 1.6,
+        lift: 0.05,
+        refract: 0.18,
+        edge: 0.04,
+        width: 0.46,
+        disp: 0.3,
+        skew: 1.5,
+        fineAmp: 0.0,
+        fineFreq: 9.0,
+        gamma: 1.0,
+        gain: 1.9,
+        octGain: 0.32,
+        litLo: -0.26,
+        litHi: 0.1,
+        dim: 0.44,
       };
       const PKEYS = Object.keys(P);
       const E = {
-        base: 0.20, hot: 0.82, chromA: 0.42, chromS: 0.030, speed: 0.070,
-        top: 0.35, press: 0.85, ripple: 1.60
+        base: 0.2,
+        hot: 0.82,
+        chromA: 0.42,
+        chromS: 0.03,
+        speed: 0.07,
+        top: 0.35,
+        press: 0.85,
+        ripple: 1.6,
       };
       const EKEYS = Object.keys(E);
       const C = {
         glow: host.dataset.liquidMetal === 'play' ? 1.28 : 1.95,
-        glowR: host.dataset.liquidMetal === 'play' ? 0.94 : 1.30,
-        glowIn: 0.30, occl: 0.62, soften: 0.24, punch: 1.50
+        glowR: host.dataset.liquidMetal === 'play' ? 0.94 : 1.3,
+        glowIn: 0.3,
+        occl: 0.62,
+        soften: 0.24,
+        punch: 1.5,
       };
       const R = {
-        speed: 1.85, width: 0.20, decay: 1.35, amp: 1.35, facet: 0.18,
-        lobes: 6.0, sharp: 1.15, emit: 0.45,
-        ptrRad: 0.55, ptrAmp: 0.32, ptrFast: 0.40, ptrRim: 0.80, ptrLag: 0.0016, ptrVref: 4.5
+        speed: 1.85,
+        width: 0.2,
+        decay: 1.35,
+        amp: 1.35,
+        facet: 0.18,
+        lobes: 6.0,
+        sharp: 1.15,
+        emit: 0.45,
+        ptrRad: 0.55,
+        ptrAmp: 0.32,
+        ptrFast: 0.4,
+        ptrRim: 0.8,
+        ptrLag: 0.0016,
+        ptrVref: 4.5,
       };
 
       const uArr = new Float32Array(PKEYS.length);
       const eArr = new Float32Array(EKEYS.length);
-      let hover = 0, hoverTarget = 0, clock = 0, last = performance.now();
+      let hover = 0,
+        hoverTarget = 0,
+        clock = 0,
+        last = performance.now();
       const RIP = [0, 1, 2].map(() => ({ x: 0, y: 0, t: -99, on: 0 }));
       const ripArr = new Float32Array(12);
-      let ripNext = 0, press = 0, pressTarget = 0;
-      const ptr = { x: 0, y: 0 }, ptrS = { x: 0, y: 0 };
-      let ptrAmt = 0, ptrSpeed = 0;
+      let ripNext = 0,
+        press = 0,
+        pressTarget = 0;
+      const ptr = { x: 0, y: 0 },
+        ptrS = { x: 0, y: 0 };
+      let ptrAmt = 0,
+        ptrSpeed = 0;
 
       function addRipple(x, y) {
         const r = RIP[ripNext];
         ripNext = (ripNext + 1) % RIP.length;
-        r.x = x; r.y = y; r.t = clock; r.on = 1;
+        r.x = x;
+        r.y = y;
+        r.t = clock;
+        r.on = 1;
       }
       function localPt(e) {
-        const b = btn.getBoundingClientRect(), s = b.height;
+        const b = btn.getBoundingClientRect(),
+          s = b.height;
         return [(e.clientX - (b.left + b.width / 2)) / s, (e.clientY - (b.top + b.height / 2)) / s];
       }
 
       let animId = null;
       function frame(now) {
         if (isDisposed) return;
-        const dtRaw = (now - last) / 1000; last = now;
+        const dtRaw = (now - last) / 1000;
+        last = now;
         const dt = Math.min(dtRaw, 1 / 20);
         clock += dt;
 
@@ -424,7 +505,10 @@ void main(){
         for (let i = 0; i < RIP.length; i++) {
           const r = RIP[i];
           if (r.on && clock - r.t > 4) r.on = 0;
-          ripArr[i * 4] = r.x; ripArr[i * 4 + 1] = r.y; ripArr[i * 4 + 2] = r.t; ripArr[i * 4 + 3] = r.on;
+          ripArr[i * 4] = r.x;
+          ripArr[i * 4 + 1] = r.y;
+          ripArr[i * 4 + 2] = r.t;
+          ripArr[i * 4 + 3] = r.on;
         }
 
         const lag = 1 - Math.pow(R.ptrLag, dt);
@@ -466,7 +550,8 @@ void main(){
         drawTo(T_rim);
 
         gl.useProgram(pDown.p);
-        gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, T_core.tex);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, T_core.tex);
         gl.uniform1i(pDown.u.uTex, 0);
         gl.uniform1f(pDown.u.uAdd, 0);
         gl.uniform2f(pDown.u.uDstTexel, 1 / T_s1.w, 1 / T_s1.h);
@@ -481,14 +566,20 @@ void main(){
           const iters = 2;
           gl.uniform1f(pBlur.u.uR, sigTex / Math.sqrt(iters) / 1.95);
           for (let i = 0; i < iters; i++) {
-            gl.bindTexture(gl.TEXTURE_2D, T_s1.tex); gl.uniform2f(pBlur.u.uDir, 1, 0); drawTo(T_s2);
-            gl.bindTexture(gl.TEXTURE_2D, T_s2.tex); gl.uniform2f(pBlur.u.uDir, 0, 1); drawTo(T_s1);
+            gl.bindTexture(gl.TEXTURE_2D, T_s1.tex);
+            gl.uniform2f(pBlur.u.uDir, 1, 0);
+            drawTo(T_s2);
+            gl.bindTexture(gl.TEXTURE_2D, T_s2.tex);
+            gl.uniform2f(pBlur.u.uDir, 0, 1);
+            drawTo(T_s1);
           }
         }
 
         gl.useProgram(pDown.p);
-        gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, T_s1.tex);
-        gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, T_rim.tex);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, T_s1.tex);
+        gl.activeTexture(gl.TEXTURE1);
+        gl.bindTexture(gl.TEXTURE_2D, T_rim.tex);
         gl.uniform1i(pDown.u.uTex, 0);
         gl.uniform1i(pDown.u.uTex2, 1);
         gl.uniform1f(pDown.u.uAdd, 1);
@@ -497,9 +588,15 @@ void main(){
         drawTo(T_a);
 
         gl.useProgram(pComp.p);
-        gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, T_s1.tex);  gl.uniform1i(pComp.u.uSoft, 0);
-        gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, T_rim.tex); gl.uniform1i(pComp.u.uRim, 1);
-        gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, T_a.tex);   gl.uniform1i(pComp.u.uGlow, 2);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, T_s1.tex);
+        gl.uniform1i(pComp.u.uSoft, 0);
+        gl.activeTexture(gl.TEXTURE1);
+        gl.bindTexture(gl.TEXTURE_2D, T_rim.tex);
+        gl.uniform1i(pComp.u.uRim, 1);
+        gl.activeTexture(gl.TEXTURE2);
+        gl.bindTexture(gl.TEXTURE_2D, T_a.tex);
+        gl.uniform1i(pComp.u.uGlow, 2);
         gl.uniform2f(pComp.u.uRes, W, H);
         gl.uniform2f(pComp.u.uC, CX, CY);
         gl.uniform2f(pComp.u.uHalf, BW / 2, BH / 2);
@@ -517,17 +614,20 @@ void main(){
         animId = requestAnimationFrame(frame);
       }
 
-      const onEnter = (e) => {
+      const onEnter = e => {
         [ptr.x, ptr.y] = localPt(e);
-        ptrS.x = ptr.x; ptrS.y = ptr.y;
-        hoverTarget = 1; ptrAmt = 1;
+        ptrS.x = ptr.x;
+        ptrS.y = ptr.y;
+        hoverTarget = 1;
+        ptrAmt = 1;
         host.classList.add('hot');
       };
       const onLeave = () => {
-        hoverTarget = 0; ptrAmt = 0;
+        hoverTarget = 0;
+        ptrAmt = 0;
         host.classList.remove('hot');
       };
-      const onDown = (e) => {
+      const onDown = e => {
         [ptr.x, ptr.y] = localPt(e);
         pressTarget = 1;
         host.classList.add('press');
@@ -559,7 +659,7 @@ void main(){
     const stageEl = rootEl.querySelector('.sylva-stage');
     const heroEl = rootEl.querySelector('.sylva-hero');
     const hosts = rootEl.querySelectorAll('[data-liquid-metal]');
-    hosts.forEach((h) => mountLiquidMetal(h));
+    hosts.forEach(h => mountLiquidMetal(h));
 
     /* =====================================================================
        2. Proximity Magnification Dock & Specular Highlights
@@ -567,11 +667,15 @@ void main(){
     const dockRoot = rootEl.querySelector('.sylva-dock');
     if (dockRoot) {
       const items = Array.from(dockRoot.querySelectorAll('[data-dock]'));
-      const onMouseMove = (e) => {
+      const onMouseMove = e => {
         const rr = dockRoot.getBoundingClientRect();
-        if (e.clientX > rr.left - 48 && e.clientX < rr.right + 48 &&
-            e.clientY > rr.top - 40 && e.clientY < rr.bottom + 80) {
-          items.forEach((item) => {
+        if (
+          e.clientX > rr.left - 48 &&
+          e.clientX < rr.right + 48 &&
+          e.clientY > rr.top - 40 &&
+          e.clientY < rr.bottom + 80
+        ) {
+          items.forEach(item => {
             const r = item.getBoundingClientRect();
             const d = Math.abs(e.clientX - (r.left + r.width / 2));
             const prox = Math.max(0, 1 - d / 120);
@@ -580,7 +684,7 @@ void main(){
             item.dataset.near = scale > 0.1 ? 'true' : 'false';
           });
         } else {
-          items.forEach((item) => {
+          items.forEach(item => {
             item.style.transform = '';
             item.dataset.near = 'false';
           });
@@ -605,7 +709,7 @@ void main(){
           if (el && el.offsetTop <= scrollPos) currentId = id;
         }
         const items = dockRootEl.querySelectorAll('a.sylva-dock-item');
-        items.forEach((item) => {
+        items.forEach(item => {
           const href = item.getAttribute('href') || '';
           item.classList.toggle('is-active', currentId !== '' && href === `#${currentId}`);
         });
@@ -618,8 +722,9 @@ void main(){
     /* =====================================================================
        3. Parallax Pointer Movement
        ===================================================================== */
-    let smooth = { x: 0, y: 0 }, targetP = { x: 0, y: 0 };
-    const onWinPointerMove = (e) => {
+    let smooth = { x: 0, y: 0 },
+      targetP = { x: 0, y: 0 };
+    const onWinPointerMove = e => {
       targetP.x = (e.clientX / window.innerWidth) * 2 - 1;
       targetP.y = (e.clientY / window.innerHeight) * 2 - 1;
     };
@@ -676,13 +781,13 @@ void main(){
           new THREE.Vector3(-100, 140, 80),
           new THREE.Vector3(260, 260, 30),
           new THREE.Vector3(580, 180, -40),
-          new THREE.Vector3(850, -180, -120)
+          new THREE.Vector3(850, -180, -120),
         ]);
         const tubeGeo = new THREE.TubeGeometry(archCurve, 120, 32, 16, false);
         const tubeMat = new THREE.MeshStandardMaterial({
           color: 0x223525,
           roughness: 0.85,
-          metalness: 0.15
+          metalness: 0.15,
         });
         const tubeMesh = new THREE.Mesh(tubeGeo, tubeMat);
         rootGroup.add(tubeMesh);
@@ -693,13 +798,13 @@ void main(){
           new THREE.Vector3(-200, -60, 110),
           new THREE.Vector3(150, 80, 100),
           new THREE.Vector3(480, 20, 20),
-          new THREE.Vector3(760, -260, -60)
+          new THREE.Vector3(760, -260, -60),
         ]);
         const subTubeGeo = new THREE.TubeGeometry(subCurve, 90, 18, 12, false);
         const subTubeMat = new THREE.MeshStandardMaterial({
           color: 0x18281b,
           roughness: 0.9,
-          metalness: 0.1
+          metalness: 0.1,
         });
         rootGroup.add(new THREE.Mesh(subTubeGeo, subTubeMat));
 
@@ -732,7 +837,7 @@ void main(){
         const P_COUNT = 900;
         const pPos = new Float32Array(P_COUNT * 3);
         for (let i = 0; i < P_COUNT; i++) {
-          pPos[i * 3]     = (Math.random() - 0.5) * 2600;
+          pPos[i * 3] = (Math.random() - 0.5) * 2600;
           pPos[i * 3 + 1] = (Math.random() - 0.5) * 1200;
           pPos[i * 3 + 2] = -250 + Math.random() * 600;
         }
@@ -743,7 +848,7 @@ void main(){
           size: 4,
           transparent: true,
           opacity: 0.65,
-          blending: THREE.AdditiveBlending
+          blending: THREE.AdditiveBlending,
         });
         const particles = new THREE.Points(pGeo, pMat);
         scene.add(particles);
@@ -798,14 +903,14 @@ void main(){
 
     return () => {
       isDisposed = true;
-      cleanupFns.forEach((fn) => fn());
+      cleanupFns.forEach(fn => fn());
     };
   }, []);
 
-    return (
-      <div ref={containerRef} className="sylva-hero-wrapper">
-        <div className="sylva-hero" id="hero">
-          <canvas id="sylva-scene"></canvas>
+  return (
+    <div ref={containerRef} className="sylva-hero-wrapper">
+      <div className="sylva-hero" id="hero">
+        <canvas id="sylva-scene"></canvas>
 
         {/* ── Top Floating Glass Dock Navigation ────────────────────────── */}
         <div className="sylva-dock-wrap">
@@ -944,7 +1049,14 @@ void main(){
               style={{ '--d': '1100ms' }}
               aria-label="Read Kashaf's background and philosophy"
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M7 17l9.2-9.2M17 17V8H8" />
               </svg>
             </a>
@@ -952,19 +1064,26 @@ void main(){
 
           {/* Hero Headline */}
           <h1 className="sylva-headline" style={{ '--pd': 18, '--pr': 1.2 }}>
-            <span><i style={{ '--d': '260ms' }}>Building with Data,</i></span>
-            <span><i style={{ '--d': '360ms' }}>AI &amp; Technology</i></span>
+            <span>
+              <i style={{ '--d': '260ms' }}>Building with Data,</i>
+            </span>
+            <span>
+              <i style={{ '--d': '360ms' }}>AI &amp; Technology</i>
+            </span>
           </h1>
 
           {/* Hero Lede / Introduction */}
           <p className="sylva-lede sylva-mask" style={{ '--d': '480ms', '--pd': 14, '--pr': 1 }}>
-            Sayyed Kashaf — B.Sc. Data Science student at Mumbai University turning data analysis, 
+            Sayyed Kashaf — B.Sc. Data Science student at Mumbai University turning data analysis,
             generative AI, and defensive cybersecurity into practical open-source solutions.
           </p>
 
           {/* Liquid Metal WebGL2 Primary Button */}
           <div className="sylva-pill-clip">
-            <div className="sylva-pill sylva-mask" style={{ '--d': '600ms', '--pd': 15, '--pr': 1.4 }}>
+            <div
+              className="sylva-pill sylva-mask"
+              style={{ '--d': '600ms', '--pd': 15, '--pr': 1.4 }}
+            >
               <div className="liquid-stage liquid-stage--explore" data-liquid-metal="explore">
                 <div className="liquid-plate plate" aria-hidden="true"></div>
                 <canvas className="liquid-fx" aria-hidden="true"></canvas>
@@ -1003,13 +1122,26 @@ void main(){
                 </span>
               </span>
             </span>
-            <span className="sylva-play-ring sylva-mask-circle" style={{ '--d': '840ms' }} aria-hidden="true"></span>
+            <span
+              className="sylva-play-ring sylva-mask-circle"
+              style={{ '--d': '840ms' }}
+              aria-hidden="true"
+            ></span>
           </span>
 
           {/* Stat Counter A */}
-          <dl className="sylva-stat sylva-stat--a sylva-mask" style={{ '--d': '700ms', '--pd': 12 }}>
+          <dl
+            className="sylva-stat sylva-stat--a sylva-mask"
+            style={{ '--d': '700ms', '--pd': 12 }}
+          >
             <span className="stat-mark" aria-hidden="true">
-              <svg viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
+              <svg
+                viewBox="0 0 30 30"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+              >
                 <circle cx="15" cy="15" r="10.5" strokeDasharray="0.6 3.6" />
                 <circle cx="15" cy="15" r="5.6" strokeDasharray="0.6 3.2" />
                 <circle cx="15" cy="15" r="1.1" fill="currentColor" stroke="none" />
@@ -1022,14 +1154,27 @@ void main(){
           </dl>
 
           {/* Stat Counter B */}
-          <dl className="sylva-stat sylva-stat--b sylva-mask" style={{ '--d': '770ms', '--pd': 13 }}>
+          <dl
+            className="sylva-stat sylva-stat--b sylva-mask"
+            style={{ '--d': '770ms', '--pd': 13 }}
+          >
             <span className="stat-mark" aria-hidden="true">
-              <svg viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
+              <svg
+                viewBox="0 0 30 30"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+              >
                 <g id="rays">
-                  <path d="M15 3.5v5" /><path d="M15 21.5v5" />
-                  <path d="M3.5 15h5" /><path d="M21.5 15h5" />
-                  <path d="M6.9 6.9l3.5 3.5" /><path d="M19.6 19.6l3.5 3.5" />
-                  <path d="M23.1 6.9l-3.5 3.5" /><path d="M10.4 19.6l-3.5 3.5" />
+                  <path d="M15 3.5v5" />
+                  <path d="M15 21.5v5" />
+                  <path d="M3.5 15h5" />
+                  <path d="M21.5 15h5" />
+                  <path d="M6.9 6.9l3.5 3.5" />
+                  <path d="M19.6 19.6l3.5 3.5" />
+                  <path d="M23.1 6.9l-3.5 3.5" />
+                  <path d="M10.4 19.6l-3.5 3.5" />
                 </g>
                 <circle cx="15" cy="15" r="3.6" />
               </svg>
@@ -1066,7 +1211,14 @@ void main(){
               aria-label="View GlowMatch AI on GitHub"
               title="Open GlowMatch AI GitHub repository"
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
@@ -1084,8 +1236,8 @@ void main(){
           </a>
         </div>
       </div>
-      </div>
-    );
-  }
+    </div>
+  );
+}
 
 export default SylvaHero;

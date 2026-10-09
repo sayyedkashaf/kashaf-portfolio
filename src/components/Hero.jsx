@@ -1,11 +1,20 @@
 import React from 'react';
-import { ArrowRight, Mail, Github, Linkedin, Terminal, Sparkles, Database, ShieldCheck, ExternalLink } from 'lucide-react';
+import {
+  ArrowRight,
+  Mail,
+  Github,
+  Linkedin,
+  Terminal,
+  Sparkles,
+  Database,
+  ShieldCheck,
+  ExternalLink,
+} from 'lucide-react';
 
 export default function Hero({ onOpenResume, theme, toggleTheme }) {
   return (
     <section id="hero" className="hero-section">
       <div className="container hero-container">
-
         {/* Left Column: Text & CTAs */}
         <div className="hero-content">
           <div className="status-badge">
@@ -17,15 +26,13 @@ export default function Hero({ onOpenResume, theme, toggleTheme }) {
             Hi, I'm <span className="gradient-text">Sayyed Kashaf</span>
           </h1>
 
-          <p className="hero-headline">
-            Data Science Student &amp; Developer
-          </p>
+          <p className="hero-headline">Data Science Student &amp; Developer</p>
 
           <p className="hero-description">
-            I'm a B.Sc. Data Science student based in Mumbai, focused on turning data and
-            technology into practical, reliable solutions. I enjoy working with Python, SQL,
-            data visualization, AI tools, and backend engineering while continuously sharpening
-            my problem-solving skills through hands-on open-source projects.
+            I'm a B.Sc. Data Science student based in Mumbai, focused on turning data and technology
+            into practical, reliable solutions. I enjoy working with Python, SQL, data
+            visualization, AI tools, and backend engineering while continuously sharpening my
+            problem-solving skills through hands-on open-source projects.
           </p>
 
           <div className="hero-cta-group">
@@ -85,20 +92,48 @@ export default function Hero({ onOpenResume, theme, toggleTheme }) {
             <div className="terminal-body">
               <pre>
                 <code>
-                  <span className="token-keyword">class</span> <span className="token-class">DataScienceStudent</span>:{"\n"}
-                  {"    "}<span className="token-keyword">def</span> <span className="token-function">__init__</span>(<span className="token-self">self</span>):{"\n"}
-                  {"        "}<span className="token-self">self</span>.name = <span className="token-string">"Sayyed Kashaf"</span>{"\n"}
-                  {"        "}<span className="token-self">self</span>.program = <span className="token-string">"B.Sc. Data Science"</span>{"\n"}
-                  {"        "}<span className="token-self">self</span>.university = <span className="token-string">"SDBI / Mumbai Univ"</span>{"\n"}
-                  {"        "}<span className="token-self">self</span>.graduation_year = <span className="token-number">2028</span>{"\n"}
-                  {"        "}<span className="token-self">self</span>.interests = [&#10;
-                  {"            "}<span className="token-string">"Data Analysis"</span>,&#10;
-                  {"            "}<span className="token-string">"GenAI & Vector Search"</span>,&#10;
-                  {"            "}<span className="token-string">"REST API Development"</span>,&#10;
-                  {"            "}<span className="token-string">"Defensive Cybersecurity"</span>&#10;
-                  {"        "}]{"\n\n"}
-                  {"    "}<span className="token-keyword">def</span> <span className="token-function">current_philosophy</span>(<span className="token-self">self</span>):{"\n"}
-                  {"        "}<span className="token-keyword">return</span> <span className="token-string">"Learn rigorously by building practical projects."</span>
+                  <span className="token-keyword">class</span>{' '}
+                  <span className="token-class">DataScienceStudent</span>:{'\n'}
+                  {'    '}
+                  <span className="token-keyword">def</span>{' '}
+                  <span className="token-function">__init__</span>(
+                  <span className="token-self">self</span>):{'\n'}
+                  {'        '}
+                  <span className="token-self">self</span>.name ={' '}
+                  <span className="token-string">"Sayyed Kashaf"</span>
+                  {'\n'}
+                  {'        '}
+                  <span className="token-self">self</span>.program ={' '}
+                  <span className="token-string">"B.Sc. Data Science"</span>
+                  {'\n'}
+                  {'        '}
+                  <span className="token-self">self</span>.university ={' '}
+                  <span className="token-string">"SDBI / Mumbai Univ"</span>
+                  {'\n'}
+                  {'        '}
+                  <span className="token-self">self</span>.graduation_year ={' '}
+                  <span className="token-number">2028</span>
+                  {'\n'}
+                  {'        '}
+                  <span className="token-self">self</span>.interests = [&#10;
+                  {'            '}
+                  <span className="token-string">"Data Analysis"</span>,&#10;
+                  {'            '}
+                  <span className="token-string">"GenAI & Vector Search"</span>,&#10;
+                  {'            '}
+                  <span className="token-string">"REST API Development"</span>,&#10;
+                  {'            '}
+                  <span className="token-string">"Defensive Cybersecurity"</span>&#10;
+                  {'        '}]{'\n\n'}
+                  {'    '}
+                  <span className="token-keyword">def</span>{' '}
+                  <span className="token-function">current_philosophy</span>(
+                  <span className="token-self">self</span>):{'\n'}
+                  {'        '}
+                  <span className="token-keyword">return</span>{' '}
+                  <span className="token-string">
+                    "Learn rigorously by building practical projects."
+                  </span>
                 </code>
               </pre>
             </div>
@@ -120,7 +155,6 @@ export default function Hero({ onOpenResume, theme, toggleTheme }) {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
